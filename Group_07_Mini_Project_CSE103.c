@@ -47,7 +47,7 @@ int main()// Main function
     struct book books[200]; // Array to store books
     int index = 0;// Index to keep track of the number of books
 
-    int x;// Variable to store user's menu choice
+    int x=0;// Variable to store user's menu choice
     while (x != 8)
     {
         // Display menu
