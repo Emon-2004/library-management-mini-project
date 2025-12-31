@@ -62,6 +62,7 @@ int main()// Main function
         printf("\n\t\t\t 8. Exit.");
         printf("\n\n\t\t\tPlease Enter Your Choice : ");
         scanf("%d", &x); // Read user's choice
+        getchar(); // to consume the newline character after scanf
 
         switch (x)
         {
@@ -190,17 +191,20 @@ void add_book(struct book books[], int *ptr)
 
     // Prompt user to enter book details
     printf("\n\t\t\tEnter Book name: ");
-    fflush(stdin);
-    gets(name);
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = 0;  // remove newline
+
     printf("\n\t\t\tEnter Author name: ");
-    fflush(stdin);
-    gets(author);
+    fgets(author, sizeof(author), stdin);
+    author[strcspn(author, "\n")] = 0;
+
     printf("\n\t\t\tEnter Book price: ");
-    fflush(stdin);
-    scanf("%f", &price);
+    scanf("%f",&price);
+    getchar(); // to consume the newline character after scanf
+
     printf("\n\t\t\tEnter Book issue date(DD/MM/YY): ");
-    fflush(stdin);
-    gets(issue_date);
+    fgets(issue_date, sizeof(issue_date), stdin);
+    issue_date[strcspn(issue_date, "\n")] = 0;
     // Copy the entered details to the book structure in the array
     strcpy(books[*ptr].name, name);
     strcpy(books[*ptr].author, author);
@@ -224,8 +228,8 @@ void search_by_name(struct book books[], int *ptr)
 
     // Prompt user to enter the book's name
     printf("\n\n\t\t\tPlease Enter The Book's Name : ");
-    fflush(stdin);
-    gets(name);
+    fgets(name,sizeof(name),stdin);
+    name[strcspn(name,"\n")] = 0;
 
     for (int i = 0; i < *ptr; i++)  // Loop through the array to find the book by name
     {
@@ -276,8 +280,8 @@ void search_by_author(struct book books[], int *ptr)
 
     // Prompt user to enter the author's name
     printf("\n\n\t\t\tPlease Enter The Book's Author Name : ");
-    fflush(stdin);
-    gets(author);
+    fgets(author,sizeof(author),stdin);
+    author[strcspn(author,"\n")] = 0;
 
     for (int i = 0; i < *ptr; i++)// Loop through the array to find the book(s) by author name
     {
