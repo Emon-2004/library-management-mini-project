@@ -380,6 +380,12 @@ int delete_last_book(struct book books[], int *ptr)
 // Function to find budget-friendly books
 void budget_friendly(struct book books[], int *ptr)
 {
+    if(*ptr == 0)
+    {
+        printf("\n\n\t\t\tNo books available in inventory.\n");
+        return;
+    }
+
     float budget;// Variable to store the budget entered by the user
 
     printf("\n\t\t\tPlease Enter Budget: "); // Prompt user to enter their budget
@@ -387,40 +393,34 @@ void budget_friendly(struct book books[], int *ptr)
     scanf("%f", &budget);
 
     bool found = false; // Flag to check if any budget-friendly books are found
-    int i = 0;    // Initialize a counter variable
 
     for(int i = 0; i < *ptr; i++)// Loop through the array to find budget-friendly books
     {
         // Check if the book's price is within the budget range (�50)
         if(books[i].price >= budget - 50 && books[i].price <= budget + 50)
         {
-            found = true;
-
-            break;// Exit the loop if a budget-friendly book is found
-        }
-    }
-    if(found)// Check if budget-friendly books are found
-    {
-        // Display section header for found budget-friendly books
-        printf("\n\t\t\t<?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?>\n");
-        printf("\n\t\t\t<?><?><?><?><?><?><?><?>      Book Found     <?><?><?><?><?><?><?><?><?><?><?>\n");
-        printf("\n\t\t\t<?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?>\n");
-        while(i < *ptr)// Loop through the array to display information for budget-friendly books
-        {
-            if(books[i].price >= budget - 50 && books[i].price <= budget + 50)
+            
+            if(!found)// Check if budget-friendly books are found
+            
             {
+                printf("\n\t\t\t<?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?>\n");
+                printf("\n\t\t\t<?><?><?><?><?><?><?><?>      Book Found     <?><?><?><?><?><?><?><?><?><?><?>\n");
+                printf("\n\t\t\t<?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?><?>\n");
+            }
+
+                found = true;            
                 // Display information for each budget-friendly book
                 printf("\n\t\t\tBook Title: %s", books[i].name);
                 printf("\n\t\t\tBook Author: %s", books[i].author);
                 printf("\n\t\t\tBook price: %.2f tk", books[i].price);
                 printf("\n\t\t\tIssue Date : %s", books[i].issue_date);
                 printf("\n");
-                found++;// Increment the found counter
-            }
-            i++;// Increment the loop counter
+                    
         }
     }
-    else // Display a message if no budget-friendly books are found
+
+    
+    if(!found) // Display a message if no budget-friendly books are found
     {
         printf("\n\t\t\t<?><?><?><?><?><?><?><?>Sorry!No Book Found<?><?><?><?><?><?><?><?><?><?><?><?>\n");
     }
@@ -443,6 +443,8 @@ void delete_any_book(struct book books[], int *ptr)
         printf("\n\t\t\tEnter the index of the book you want to delete: ");
         fflush(stdin);
         scanf("%d", &bookIndex);
+                --bookIndex;// Adjust the index to match array indexing (starting from 0)
+
 
         if (bookIndex >= 0 && bookIndex < *ptr) // Check if the provided index is valid
         {
@@ -461,7 +463,6 @@ void delete_any_book(struct book books[], int *ptr)
             printf("\n\n\t\t\tBook Deleted Successfully!\n\n"); // Display a success message
             printf("\n\t\t\tTotal Number of Books Left: %d\n", *ptr);// Display the total number of books after deletion
 
-        --bookIndex;// Adjust the index to match array indexing (starting from 0)
         }
         else // Display a message for an invalid book index
         {
