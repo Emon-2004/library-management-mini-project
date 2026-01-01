@@ -19,7 +19,7 @@ void add_book(struct book books[], int *ptr);// Function to add a book to the co
 void search_by_name(struct book books[], int *ptr);// Function to search for a book by its name
 void search_by_author(struct book books[], int *ptr);// Function to search for a book by its author
 void show_all_books(struct book books[], int *ptr);// Function to display all books in the collection
-int delete_last_book(struct book books[], int *ptr);// Function to delete the last added book from the collection
+void delete_last_book(struct book books[], int *ptr);// Function to delete the last added book from the collection
 void budget_friendly(struct book books[], int *ptr);// Function to display budget-friendly books
 void delete_any_book(struct book books[], int *ptr);// Function to delete any book from the collection
 void exitMessage();// Function to display an exit message
@@ -354,7 +354,7 @@ void show_all_books(struct book books[], int *ptr)
 }
 
 // Function to delete the last book in the inventory
-int delete_last_book(struct book books[], int *ptr)
+void delete_last_book(struct book books[], int *ptr)
 {
     if (*ptr > 0)// Check if there are books in the inventory
     {
@@ -367,13 +367,10 @@ int delete_last_book(struct book books[], int *ptr)
 
         printf("\n\n\t\t\tLast Book Deleted Successfully!\n\n"); // Display a success message
         printf("\n\t\t\tTotal Number of Books Left: %d\n", *ptr);// Display the total number of books left in the inventory
-
-        return *ptr;// Return the updated book count
     }
     else // Display a message if there are no books in the inventory
     {
         printf("\n\n\t\t\t<?><?><?><?><?><?> Sorry, there's no Books in the Inventory.<?><?><?><?><?><?>\n\n");
-        return *ptr; // Return the current book count
     }
 }
 
